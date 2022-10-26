@@ -5,4 +5,4 @@ import './assets/main.css'
 
 new Vue({
   render: (h) => h(App)
-}).$mount('#app')
+}).$mount('#vue-root')

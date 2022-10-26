@@ -2,9 +2,7 @@
 
 #app {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-
+  padding: 1rem;
   font-weight: normal;
 }
 
@@ -27,9 +25,10 @@ a,
     place-items: center;
   }
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+}
+
+button {
+  background:  rgba(0, 189, 126, 0.521);
+  margin: 5px;
+  padding: 5px;
 }
