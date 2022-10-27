@@ -1,13 +1,4 @@
 <template>
-  <div class="item">
-    <h2>{{ title }}</h2>
-    QasimTalkin is <a :href="gitURL">QasimTalkin</a> on GitHub.
-    Works as {{ job }} at {{ company }}.
-    <button @click="greet()">Greet</button>
-    <button @click="greet('QasimTalkin')">Greet QasimTalkin</button> 
-    <button @click="reverseJob">Reverse Job</button>
-    <!-- container for cards --> 
-    <h2> {{ vue.text }}</h2>
     <!-- button to show eventModifierCards when showModfiderCards is true  -->
     <button @click="toggleEventModifierCards"> {{ showModfierCards ? 'Hide' : 'Show' }} Event Modifier Cards</button>
     <div  v-if="showModfierCards" class="cards">
@@ -24,7 +15,7 @@
         <button v-else-if="modifier.name === 'passive'" @click.passive="add">Click Passive</button>
         <button v-else-if="modifier.name === 'native'" @click.native="add">Click Native</button>
         <button v-else-if="modifier.name === 'double'" @click.double="add">Click Double</button>
-        <input type="text" v-else-if="modifier.name === 'enter'" v-model="vue.events.value" placeholder="Enter">
+        <input type="text" v-else-if="modifier.name === 'enter'" @keyup.enter="add" placeholder="Enter">
         <input type="text" v-else-if="modifier.name === 'tab'" @keyup.tab="add" placeholder="Tab">
         <input type="text" v-else-if="modifier.name === 'delete'" @keyup.delete="add" placeholder="Delete">
         <input type="text" v-else-if="modifier.name === 'down'" @keyup.down="add" placeholder="Down">
@@ -33,31 +24,14 @@
         <h2>{{ vue.events.value }}</h2>
     </div>
     </div>
-    <!-- exmple of two way data binding -->
-    <h2> {{ vue.twoWayDataBinding.title }}</h2>
-    <input type="text" v-model="vue.twoWayDataBinding.value" placeholder="Enter to see v-model in action">
-    <h4> {{ vue.twoWayDataBinding.value }}</h4>
-    
-
-    
-
-
-  </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-        title: "QasimTalkin",
-        job: "Software Engineer",
-        company: "Google",
-        gitURL: "www.github.com/qasimtalkin",
-        showModfierCards: true,
-        vue: {
-          events: {
             title: "Vue Event Modifiers",
-            value:0,
+            value:'',
             modifiers:[
               {id: 1, name: "once", description: "The event will be triggered at most once.", code: "v-on:click.once='addOneToOutput'"},
               {id: 2, name: "capture", description: "Use capture mode when adding the event listener.", code: "v-on:click.capture='addOneToOutput'"},
@@ -73,77 +47,16 @@ export default {
               {id: 12, name: "delete", description: "The event will be triggered when the delete key is pressed." , code: "v-on:keyup.delete='addOneToOutput'"},
               {id: 13, name: "down", description: "The event will be triggered when the down key is pressed." , code: "v-on:keyup.down='addOneToOutput'"},
             ]
-          },
-          text: "Vue is a progressive framework for building user interfaces.",
-          twoWayDataBinding: {
-            title: "Vue Two Way Data Binding",
-            value: ''
           }
-        },
-      
-    }
   },
   methods: {
-    greet(value='Hi') {
-      alert(value);
-    },
-    reverseJob() {
-      this.job = this.job.split("").reverse().join("");
-    },
     toggleEventModifierCards() {
       this.showModfierCards = !this.showModfierCards;
     },
     add(){
-      // cahnge the vlue to int and add 1
       this.vue.events.value++;
     }
   },
 };
 
 </script>
-
-<style scoped>
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  background-color: #f1f1f1;
-}
-
-.card {
-  width: 30%;
-  padding: 1rem;
-  margin: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-
-/* code block to show color for js */
-pre {
-  color: #fff;
-  background-color: #000;
-  min-width: 100%;
-  text-align: center;
-}
-.outputBox {
-  width: 100%;
-  padding: 1rem;
-  margin: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  text-align: center;
-  background-color: hsl(120, 100%, 90%);
-}
-input {
-  width: 100%;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  text-align: center;
-  margin-top: 1rem
-}
-
-h4{
-  text-align: center;
-}
-</style>

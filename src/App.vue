@@ -7,3 +7,11 @@ import VueHome from './components/VueHome.vue'
     <VueHome />
   </div>
 </template>
+
+<style>
+#app {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+</style>
