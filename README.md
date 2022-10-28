@@ -170,8 +170,56 @@ new Vue({
 </script>
 ```
 
-### vue computed properties
-- computed properties are used to cache and filter data
-- computed properties are cached based on their dependencies
+## vue computed properties
 - `computed` is an object that contains the computed properties
-- `
+- every time the data changes, the computed properties are re-evaluated
+- computed properties are only re-evaluated when their dependencies change
+```html
+  <script>
+    export default {
+      name: 'App',
+      data() {
+        return {
+          value1: 0,
+          value2: 0} },
+      computed: {
+        totalSum() {
+          console.log('totalSum')
+          return this.value1 + this.value2}}}
+  </script>
+```
+## Dynamic CSS Classes
+- we can add dynamic CSS classes to the DOM using `v-bind:class` in the template or `:` in the template
+- it take in key value pairs where the key is the CSS class and the value is a boolean
+- example if `isActive` is true, the CSS class `active` will be added to the DOM
+```html
+<div v-bind:class="{ active: isActive }"></div>
+<div :class="{ active: isActive }"></div>
+```
+
+## conditional v-if , v-else-if, v-show
+- we can add conditional rendering to the DOM using `v-if` in the template
+- `v-if` is used to render the DOM if the condition is true
+- `v-else-if` is used to render the DOM if the condition is true
+- `v-else` is used to render the DOM if the condition is true
+- `v-show` is different from `v-if` in that `v-show` will always render the DOM but will use the CSS property `display: none` to hide the DOM
+```html
+<div v-if="isActive">Active</div>
+<div v-else-if="isInactive">Inactive</div>
+<div v-else>Unknown</div>
+<div v-show="isActive">Active</div>
+```
+
+## looping v-for
+- we can add looping to the DOM using `v-for` in the template 
+- `v-for` is used to render the DOM for each item in the array
+- `v-for` can also be used to render the DOM for each item in the object
+```html
+<div v-for="item in items" :key="item.id">{{ item.name }}</div>
+<div v-for="(item, index) in items" :key="item.id">{{ index }} - {{ item.name }}</div>
+<div v-for="(value, key, index) in object" :key="index">{{ index }} - {{ key }} - {{ value }}</div>
+```
+
+## multiple vue instances
+- we can create multiple vue instances using `new Vue()`
+- each vue instance will have its own data, methods, computed properties, and lifecycle hooks

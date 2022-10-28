@@ -1,3 +1,7 @@
+
+<!-- import footer -->
+
+
 <template>
   <div class="item">
     <h2>{{ title }}</h2>
@@ -30,17 +34,38 @@
         <input type="text" v-else-if="modifier.name === 'down'" @keyup.down="add" placeholder="Down">
       </div>
       <div class="outputBox">
-        <h2>{{ vue.events.value }}</h2>
+        <h3>{{ vue.events.value }}</h3>
     </div>
     </div>
     <!-- exmple of two way data binding -->
     <h2> {{ vue.twoWayDataBinding.title }}</h2>
     <input type="text" v-model="vue.twoWayDataBinding.value" placeholder="Enter to see v-model in action">
     <h4> {{ vue.twoWayDataBinding.value }}</h4>
-    
-
-    
-
+  <!-- example of computed properties -->
+   <h2> Vue Computed properties</h2>
+   <button @click="computedA++"> add A</button>
+   <p> A - {{ computedA }}</p>
+   <button @click="computedB++"> add B</button>
+   <p> B - {{ computedB }}</p>
+    <p> A + B = {{ computedSum }}</p>
+  <!-- example of dynamic css property -->
+    <h2> Dynaic Css Classes </h2>
+    <button @click="isDynamicClass = !isDynamicClass">Toggle</button>
+    <p :class="addClasses">isActive - {{ isDynamicClass }}</p>
+  <!-- example of dynamic condtionals -->
+    <h2> if and show condtional </h2>
+    <button v-on:click="show = !show">Toggle</button>
+    <div v-if="show">
+      <p>Now you see me</p>
+    </div>
+    <div v-show="show">
+      <p>Now you see me</p>
+    </div>
+  <!-- example of dynamic loops -->
+    <h2> Loops </h2>
+    <template>
+      <div v-for="(item, index ) in items" :key="item.id"> {{ index+1 }} : {{ item.name }}</div>
+    </template>
 
   </div>
 </template>
@@ -54,6 +79,12 @@ export default {
         company: "Google",
         gitURL: "www.github.com/qasimtalkin",
         showModfierCards: true,
+        computedA: 0,
+        computedB: 0,
+        isDynamicClass: true,
+        show: true,
+        items:[{id: 1, name: 'QasimTalkin'}, {id: 2, name: 'Vue'}, {id: 3, name: 'JavaScript'}],
+        text: "Vue is a progressive framework for building user interfaces.",
         vue: {
           events: {
             title: "Vue Event Modifiers",
@@ -74,7 +105,6 @@ export default {
               {id: 13, name: "down", description: "The event will be triggered when the down key is pressed." , code: "v-on:keyup.down='addOneToOutput'"},
             ]
           },
-          text: "Vue is a progressive framework for building user interfaces.",
           twoWayDataBinding: {
             title: "Vue Two Way Data Binding",
             value: ''
@@ -94,15 +124,32 @@ export default {
       this.showModfierCards = !this.showModfierCards;
     },
     add(){
-      // cahnge the vlue to int and add 1
       this.vue.events.value++;
     }
   },
+  computed: {
+    computedSum() {
+      return this.computedA + this.computedB;
+    },
+    addClasses() {
+      return {
+        active: this.isDynamicClass,
+        inactive: !this.isDynamicClass
+      }
+    }
+  }
 };
 
 </script>
 
 <style scoped>
+
+h2 {
+  padding-top: 10px;
+  border-top: 1px solid #ccc;
+  margin: 5px 0 0 0;
+}
+
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -146,4 +193,35 @@ input {
 h4{
   text-align: center;
 }
+/* an animated active class with pulse effect */
+.active {
+  animation: activePulse 3s infinite;
+}
+@keyframes activePulse {
+  0% {
+    background-color: hsl(120, 100%, 20%);
+  }
+  50% {
+    background-color: hsl(120, 100%, 30%);
+  }
+  100% {
+    background-color: hsl(120, 100%, 50%);
+  }
+}
+
+.inactive {
+  animation: inActivePulse 3s infinite;
+}
+@keyframes inActivePulse {
+  0% {
+    background-color: hsl(10, 41%, 42%);
+}
+  50% {
+    background-color: hsl(10, 41%, 52%);
+  }
+  100% {
+    background-color: hsl(10, 41%, 72%);
+  }
+}
+
 </style>
