@@ -1,9 +1,9 @@
 <!-- simple footer with qasimtalkin -->
 <template>
-  <div class="footer">
+  <div>
     <h2>QasimTalkin</h2>
     <p>QasimTalkin is <a :href="gitURL">QasimTalkin</a> on GitHub.</p>
-    <p>Works as {{ job }} at {{ company }}.</p>
+    <p>Works as {{ job }} at {{ company }}. {{app1Name}}</p>
   </div>
 </template>
 
@@ -13,7 +13,8 @@ export default {
     return {
       job: "Software Engineer",
       company: "Google",
-      gitURL: "www.github.com/qasimtalkin"
+      gitURL: "www.github.com/qasimtalkin",
+      app1Name: app.title,
     };
   }
 };

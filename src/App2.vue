@@ -1,10 +1,10 @@
 <script setup>
-import VueHome from './components/VueHome.vue'
+import Footer from './components/moelcules/Footer.vue'
 </script>
 
 <template>
   <div id="app">
-    <VueHome />
+    <Footer />
   </div>
 </template>
 

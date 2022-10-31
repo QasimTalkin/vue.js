@@ -223,3 +223,17 @@ new Vue({
 ## multiple vue instances
 - we can create multiple vue instances using `new Vue()`
 - each vue instance will have its own data, methods, computed properties, and lifecycle hooks
+```js
+var app1 = new Vue({
+  el: '#app1',
+  data: {
+    message: 'Hello Vue.js!'
+  }
+})
+var app2 = new Vue({
+  el: '#app2',
+  data: {
+    message: 'Hello Vue.js!'
+  }
+})
+```
