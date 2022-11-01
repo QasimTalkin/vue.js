@@ -4,6 +4,7 @@
 
 <template>
   <div class="item">
+
     <h2>{{ title }}</h2>
     QasimTalkin is <a :href="gitURL">QasimTalkin</a> on GitHub.
     Works as {{ job }} at {{ company }}.
@@ -39,7 +40,7 @@
     </div>
     <!-- exmple of two way data binding -->
     <h2> {{ vue.twoWayDataBinding.title }}</h2>
-    <input type="text" v-model="vue.twoWayDataBinding.value" placeholder="Enter to see v-model in action">
+    <input ref='hi' type="text" v-model="vue.twoWayDataBinding.value" placeholder="Enter to see v-model in action">
     <h4> {{ vue.twoWayDataBinding.value }}</h4>
   <!-- example of computed properties -->
    <h2> Vue Computed properties</h2>
@@ -66,11 +67,19 @@
     <template>
       <div v-for="(item, index ) in items" :key="item.id"> {{ index+1 }} : {{ item.name }}</div>
     </template>
-
+    <h2>Vue Refs ($ref)</h2>
+    <button @click="showRefs">Show Refs</button> 
+    <HelloWorld />
+    
   </div>
 </template>
 
 <script>
+import Vue from "vue";
+import HelloWorld from "./moelcules/HelloWorld.vue";
+
+Vue.component('HelloWorld', HelloWorld);
+
 export default {
   data() {
     return {
@@ -125,6 +134,9 @@ export default {
     },
     add(){
       this.vue.events.value++;
+    },
+    showRefs() {
+      console.log(this.$refs);
     }
   },
   computed: {

@@ -237,3 +237,42 @@ var app2 = new Vue({
   }
 })
 ```
+
+## vue components
+- we can create reusable components using `Vue.component()`
+- components are reusable Vue instances with a name
+- components can be registered globally or locally
+- to register a component globally, we use `Vue.component()`
+- to register a component locally, we use `components` in the `Vue` instance
+```js
+// global component
+Vue.component('app-servers', {
+  template: '<h1>Hello Vue.js!</h1>'
+})
+// local component
+new Vue({
+  el: '#app',
+  components: {
+    'app-servers': {
+      template: '<h1>Hello Vue.js!</h1>'
+    }
+  }
+})
+```
+## vue referencing with refs
+- we can reference the DOM using `$ref` in the template
+- `$ref` is used to reference the DOM element 
+- to get 'yourAddress' from the DOM, we can use `this.$refs.yourAddress.value`
+```html
+<input type="text" ref="yourAddress">
+<script>
+  export default {
+    name: 'App',
+    methods: {
+      submit() {
+        console.log(this.$refs.yourAddress.value)
+      }
+    }
+  }
+</script>
+```

@@ -1,21 +1,28 @@
-<!-- simple footer with qasimtalkin -->
+<!-- import HelloWorld.vue and add it to footer button -->
 <template>
-  <div>
-    <h2>QasimTalkin</h2>
-    <p>QasimTalkin is <a :href="gitURL">QasimTalkin</a> on GitHub.</p>
-    <p>Works as {{ job }} at {{ company }}. {{app1Name}}</p>
+  <div class="footer">
+    <h2>Footer</h2>
+    <button @click="showHelloWorld">Show Hello World</button>
+    <HelloWorld v-if="showHelloWorldComponent" />
   </div>
 </template>
 
 <script>
+import HelloWorld from "./HelloWorld.vue";
+ 
 export default {
+  components: {
+    HelloWorld,
+  },
   data() {
     return {
-      job: "Software Engineer",
-      company: "Google",
-      gitURL: "www.github.com/qasimtalkin",
-      app1Name: app.title,
+      showHelloWorldComponent: false,
     };
-  }
+  },
+  methods: {
+    showHelloWorld() {
+      this.showHelloWorldComponent = !this.showHelloWorldComponent;
+    },
+  },
 };
 </script>
