@@ -12,7 +12,7 @@ import VueHome from './components/VueHome.vue'
 #app {
   display: flex;
   justify-content: center;
-  background: #f5f5bfa1;
+  background: #f8f8d062;
   border: 1px solid #000;
   margin: auto;
   padding-bottom: 20px;

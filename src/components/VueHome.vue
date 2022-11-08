@@ -29,7 +29,7 @@
         <button v-else-if="modifier.name === 'passive'" @click.passive="add">Click Passive</button>
         <button v-else-if="modifier.name === 'native'" @click.native="add">Click Native</button>
         <button v-else-if="modifier.name === 'double'" @click.double="add">Click Double</button>
-        <input type="text" v-else-if="modifier.name === 'enter'" v-model="vue.events.value" placeholder="Enter">
+        <input ref='qasim' type="text" v-else-if="modifier.name === 'enter'" v-model="vue.events.value" placeholder="Enter">
         <input type="text" v-else-if="modifier.name === 'tab'" @keyup.tab="add" placeholder="Tab">
         <input type="text" v-else-if="modifier.name === 'delete'" @keyup.delete="add" placeholder="Delete">
         <input type="text" v-else-if="modifier.name === 'down'" @keyup.down="add" placeholder="Down">
@@ -69,20 +69,26 @@
     </template>
     <h2>Vue Refs ($ref)</h2>
     <button @click="showRefs">Show Refs</button> 
+    <h2>Components</h2>
     <HelloWorld />
-    
+    <Calculator />
+    <h2>refs</h2>
+    <input type="text" ref="outputRef" v-on:keyup="updateRef()" >
+    <p> The output from ref is {{ outputRef }} </p> 
   </div>
 </template>
 
 <script>
 import Vue from "vue";
 import HelloWorld from "./moelcules/HelloWorld.vue";
+import Calculator from "./organism/Calculator.vue";
 
 Vue.component('HelloWorld', HelloWorld);
-
+Vue.component('Calculator', Calculator);
 export default {
   data() {
     return {
+        outputRef: this.$refs.outputRef,
         title: "QasimTalkin",
         job: "Software Engineer",
         company: "Google",
@@ -123,6 +129,9 @@ export default {
     }
   },
   methods: {
+    updateRef(){
+      this.outputRef = this.$refs.outputRef.value;
+    },
     greet(value='Hi') {
       alert(value);
     },

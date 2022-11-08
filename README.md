@@ -76,7 +76,7 @@ new Vue({
   },
   methods: {
     reverseMessage() {
-      this.message = this.message.split('').reverse().join('')
+      this.message = this.message.split(''+n('')
     }
   }
   }
@@ -262,7 +262,8 @@ new Vue({
 ## vue referencing with refs
 - we can reference the DOM using `$ref` in the template
 - `$ref` is used to reference the DOM element 
-- to get 'yourAddress' from the DOM, we can use `this.$refs.yourAddress.value`
+- to get 'yourAddress' from the DOM, we can use `this.$refs.yourAd
+- dress.value`
 ```html
 <input type="text" ref="yourAddress">
 <script>
@@ -276,3 +277,19 @@ new Vue({
   }
 </script>
 ```
+## Vui CLI
+- Vue CLI is a command line interface for Vue.js
+  - Uses ES6 syntax
+  - compile and bundle the code
+  - Single file template
+  - Hot reloading
+
+## Nesting components
+- for large projects we split the components into smaller components
+- we can nest components inside other components
+- we need to register the nested components in the parent component
+  - we can register the nested components globally or locally
+    - locally `components: { 'app-servers': AppServers }`
+    - globally `Vue.component('app-servers', AppServers)`
+
+## Scoped Components CSS -------- 20 -----

@@ -2,7 +2,7 @@
 <template>
   <div class="footer">
     <h2>Footer</h2>
-    <button @click="showHelloWorld">Show Hello World</button>
+    <button @click="showHelloWorld">{{ showHelloWorldComponent ? 'Hide' : 'Show'}} Hello World</button>
     <HelloWorld v-if="showHelloWorldComponent" />
   </div>
 </template>
@@ -26,3 +26,14 @@ export default {
   },
 };
 </script>
+
+<!-- style fotte to be at the bottom of the page .footer -->
+<style>
+.footer {
+  background-color: #f1f1f1;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+}
+</style>

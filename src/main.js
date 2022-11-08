@@ -1,15 +1,19 @@
 import Vue from 'vue'
 import App from './App.vue'
 import App2 from './App2.vue'
+import Footer from './components/moelcules/Footer.vue'
 import './assets/main.css'
 
-Vue.component('greeting', {
-  template: '<p>Hey there, I am . <button v-on:click="changeName">Change name</button></p>'
-})
+Vue.component('site-footer', Footer)
 
-let app = new Vue({
-  render: (h) => h(App)
-}).$mount('#vue-root')
+// let app = new Vue({
+//   render: (h) => h(App),
+//   components: {
+//     'app-servers': {
+//       template: '<h1>Hello Vue.js!</h1>'
+//     }
+//   }
+// }).$mount('#vue-root')
 
 let app2 = new Vue({
   render: (h) => h(App2)
