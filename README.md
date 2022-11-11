@@ -33,10 +33,7 @@ class: lead
 
 ## Installing Vue.js
 
-Vue.js can be installed in two ways:
-  - CDN for version 2.6.10 `<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>`
-  - NPM for version 2.6.10 `npm i vue 2.6.10`
-
+ 
 
 ## Vue.js Instance
 - A Vue.js instance is created by calling the `Vue` function
@@ -292,4 +289,47 @@ new Vue({
     - locally `components: { 'app-servers': AppServers }`
     - globally `Vue.component('app-servers', AppServers)`
 
-## Scoped Components CSS -------- 20 -----
+## Scoped Components Classe
+* Issue
+  * when we style the components, the styles are applied globally and can affect other components
+* Solution
+  * we can scope the styles to the component using `scoped` in the style tag
+  * `scoped` will only apply the styles to the component and not to the other components
+```html
+<style scoped>
+  .red {
+    color: red;
+  }
+</style>
+```
+## Example of nested components
+* Issue
+  * we have a component that has a list of servers
+  * we have a component that has a list of users
+  * we want to reuse the list of servers and users in the other components
+  * it will be easier to maintain the code if we reuse the components
+* Solution
+  * we can create a component that has a list of servers
+  * we can create a component that has a list of users
+  * we can reuse the components in the other components
+  * Nested components are called in template using `<name-of-component></name-of-component>`
+```html
+<template>
+  <div>
+    <app-servers></app-servers>
+    <app-users></app-users>
+  </div>
+</template>
+<script>
+  import AppServers from './AppServers'
+  import AppUsers from './AppUsers'
+  export default {
+    name: 'App',
+    components: {
+      'app-servers': AppServers,
+      'app-users': AppUsers
+    }
+  }
+</script>
+```
+## Passing data to components (props)
