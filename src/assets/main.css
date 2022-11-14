@@ -19,13 +19,6 @@ a,
   }
 }
 
-@media (min-width: 2048px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-}
 
 button {
   background:  rgba(0, 189, 126, 0.521);
