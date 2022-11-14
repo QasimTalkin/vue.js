@@ -295,6 +295,7 @@ new Vue({
 * Solution
   * we can scope the styles to the component using `scoped` in the style tag
   * `scoped` will only apply the styles to the component and not to the other components
+
 ```html
 <style scoped>
   .red {
@@ -302,7 +303,9 @@ new Vue({
   }
 </style>
 ```
+
 ## Example of nested components
+
 * Issue
   * we have a component that has a list of servers
   * we have a component that has a list of users
@@ -332,4 +335,17 @@ new Vue({
   }
 </script>
 ```
+
+## reusing components Example
+* components map
+```mermaid
+graph LR
+A[Hard edge] -->B(Round edge)
+    B --> C{Decision}
+    C -->|One| D[Result one]
+    C -->|Two| E[Result two]
+​```
+
+
 ## Passing data to components (props)
+
