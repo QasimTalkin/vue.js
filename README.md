@@ -335,17 +335,19 @@ new Vue({
   }
 </script>
 ```
-
 ## reusing components Example
-* components map
+
+
+Here is a simple flow chart:
+
 ```mermaid
-graph LR
-A[Hard edge] -->B(Round edge)
-    B --> C{Decision}
-    C -->|One| D[Result one]
-    C -->|Two| E[Result two]
-​```
-
-
-## Passing data to components (props)
-
+graph TD;
+    RootComponent-->Header;
+    RootComponent-->Footer;
+    RootComponent-->Content;
+    Content-->ListOfOrders;
+    Header-->Logo;
+    Header-->Navigation;
+    Footer-->SocialMedia;
+    Footer-->CopyRightsNotice;
+```
