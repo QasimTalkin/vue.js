@@ -649,3 +649,40 @@ console.log(b.name) // b
   }
 </script>
 ```
+## Dynamic Components
+* Problem
+  * based on some condition, we want to render a different component in the same place
+  * when the user clicks on a button, we want to render a different component
+* Solution
+  * we can render a different component using <component :is="componentName"></component>
+## Dynamic Components example
+```html
+<template>
+  <div>
+    <h1>Dynamic Components</h1>
+    <button @click="toggleComponent">Toggle Component</button>
+    <component :is="componentName"></component>
+  </div>
+</template>
+<script>
+  import AppEmployees from './AppEmployees'
+  import AppSlots from './AppSlots'
+  export default {
+    name: 'AppDynamicComponents',
+    components: {
+      'app-employees': AppEmployees,
+      'app-slots': AppSlots
+    },
+    data() {
+      return {
+        componentName: 'app-employees'
+      }
+    },
+    methods: {
+      toggleComponent() {
+        this.componentName = this.componentName === 'app-employees' ? 'app-slots' : 'app-employees'
+      }
+    }
+  }
+</script>
+```
