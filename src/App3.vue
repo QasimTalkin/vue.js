@@ -1,7 +1,9 @@
 <template>
   <div>
     <app-header />
-    <app-content :toDoList="toDoList" />
+    <app-content :toDoList="toDoList" :title="toDoTitle"/>
+    <hr>
+    <app-content :toDoList="toDoList" :title="toDotitle"/>
     <site-footer />
   </div>
 </template>
@@ -42,7 +44,9 @@
             description: 'Learn Vue 3 by building a simple blog app',
             isComplete: false
           },
-        ]}
+        ],
+        toDoTitle: 'To Do List'
+      }
     }
   }
 </script>

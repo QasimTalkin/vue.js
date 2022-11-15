@@ -1,5 +1,8 @@
 <template>
   <div>
+    <h2> {{ toDoTitle }} </h2>
+    <!-- change title -->
+    <button @click="changeTitle">Change Title</button>
    <div class="cards">
     <div v-for="todo in toDoList" :key="todo.title" class="card">
         <div class="card-body">
@@ -8,7 +11,6 @@
           <button class="btn btn-primary" @click="setComplete(todo)">Set Complete</button>
           <div class="complete" :style="{width: todo.isComplete ? '100%' : '2%'}"></div>
         </div>
-        
     </div>
    </div>
 
@@ -24,11 +26,18 @@
             description: 'Learn Vue by building a simple blog app',
             isComplete: true
           }]
+      },
+      toDoTitle:{
+        type: String,
+        default: 'To Do List'
       }
     },
     methods: {
       setComplete(todo) {
         todo.isComplete = true;
+      },
+      changeTitle() {
+        this.toDoTitle = 'To Do List 2'
       }
     }
   }
@@ -89,6 +98,12 @@
   height: 5px;
   width: 25%;
   transition: width 0.5s ease-in-out;
+}
+
+h2 {
+  text-align: center;
+  padding: 1rem;
+  font-size: 2rem;
 }
 
 </style>

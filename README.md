@@ -437,3 +437,31 @@ graph TD;
       }
     }
   }
+</script>
+```
+## Primitive and Reference Types
+* Primitive Types
+  * String
+  * Number
+  * Boolean
+  * Null
+  * Undefined
+  * Symbol
+* Reference Types
+  * Object
+  * Array
+  * Function
+```js
+// primitive type
+let a = 1
+let b = a
+a = 2
+console.log(a) // 2
+console.log(b) // 1
+// reference type
+let a = { name: 'a' }
+let b = a
+a.name = 'b'
+console.log(a.name) // b
+console.log(b.name) // b
+```
