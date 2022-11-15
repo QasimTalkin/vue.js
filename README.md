@@ -592,3 +592,60 @@ console.log(b.name) // b
 }
 </script>
 ```
+
+## Slots (dynamic components)
+* Issue
+  * We can pass data using props and events but when it comes to passing templates, we can't do that like an ordinary HTML element
+  * We would like to pass templates to keep our components reusable
+* Solution
+  * We can pass templates using
+    * `<slot>` slots
+    * `<slot name="slot-name">` named slots
+    * `<slot name="slot-name" v-bind:slot-prop="slotProp">` slots with props
+
+## Slots example
+```html
+<template>
+  <div>
+    <h1>Slots</h1>
+    <slot></slot>
+    <slot name="slot-name"></slot>
+    <slot name="slot-name" v-bind:slot-prop="slotProp"></slot>
+  </div>
+</template>
+<script>
+  export default {
+    name: 'AppSlots',
+    props: {
+      slotProp: {
+        type: String,
+        required: true,
+        default: ''
+      }
+    }
+  }
+</script>
+// parent component
+<template>
+  <div>
+    <app-slots>
+      <h2>Default Slot</h2>
+    </app-slots>
+    <app-slots>
+      <h2 slot="slot-name">Named Slot</h2>
+    </app-slots>
+    <app-slots>
+      <h2 slot="slot-name" slot-prop="Slot Prop">Named Slot with Props</h2>
+    </app-slots>
+  </div>
+</template>
+<script>
+  import AppSlots from './AppSlots'
+  export default {
+    name: 'App',
+    components: {
+      'app-slots': AppSlots
+    }
+  }
+</script>
+```

@@ -35,7 +35,7 @@
         todo.isComplete = true;
       },
       changeTitle() {
-        this.toDoTitle = 'To Do List 2'
+        this.toDoTitle === 'To Do List 2' ? this.toDoTitle = 'To Do List' : this.toDoTitle = 'To Do List 2'
         this.$emit('changeTitle', this.toDoTitle)
       }
     }
