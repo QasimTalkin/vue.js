@@ -686,3 +686,24 @@ console.log(b.name) // b
   }
 </script>
 ```
+
+## Keep Alive
+* Problem
+  * when components are destroyed, they are removed from the DOM
+  * the data is lost
+  * we would like to keep the data and the DOM
+* Solution
+  * we can keep the data and the DOM using `<keep-alive></keep-alive>`
+
+## Keep Alive example
+```html
+<template>
+  <div>
+    <h1>Keep Alive</h1>
+    <button @click="toggleComponent">Toggle Component</button>
+    <keep-alive>
+      <component :is="componentName"></component>
+    </keep-alive>
+  </div>
+</template>
+```
