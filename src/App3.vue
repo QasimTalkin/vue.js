@@ -1,7 +1,7 @@
 <template>
   <div>
-    <app-header />
-    <form-template> 
+    <app-header @toggleLogin="toggleForm($event)"/>
+    <component v-show="loggedIn" :is="currentForm">
       <div slot='title'>Add new Task to learn</div>
       <div slot='content'>
         <div class="form-group">
@@ -20,7 +20,7 @@
       <div slot='controls'>
         <button class="btn btn-primary" @click="addTask">Add Task</button>
       </div> 
-    </form-template>
+    </component>
     <app-content :toDoList="toDoList" :title="toDoTitle" @changeTitle="titleChange($event)"/>
     <site-footer :toDoTitle="toDoTitle"  />
   </div>
@@ -42,6 +42,8 @@
       title: '',
       description: '',
       isComplete: false,
+      currentForm: null,
+      loggedIn: false,
       toDoList: [{
             title: 'Learn Vue',
             description: 'Learn Vue by building a simple blog app',
@@ -76,29 +78,29 @@
         console.log(title)
       },
       addTask() {
-        this.toDoList.push({
+        Vue.set(this.toDoList, this.toDoList.length, {
           title: this.title,
           description: this.description,
           isComplete: this.isComplete
         })
-      //  clear fileds and render on screen 
-        this.title = '';
-        this.description = '';
-        this.isComplete = false;    
+      },
+      toggleForm(loggedIn) {
+        this.loggedIn = loggedIn;
+        this.currentForm = loggedIn ? 'form-template' : null;
       }
     },
-    beforeCreate() {
-      alert('beforeCreate')
-    },
-    created() {
-      alert('created')
-    },
-    beforeMount() {
-      alert('beforeMount')
-    },
-    mounted() {
-      alert('mounted')
-    },
+    // beforeCreate() {
+    //   alert('beforeCreate')
+    // },
+    // created() {
+    //   alert('created')
+    // },
+    // beforeMount() {
+    //   alert('beforeMount')
+    // },
+    // mounted() {
+    //   alert('mounted')
+    // },
     // beforeUpdate() {
     //   alert('beforeUpdated')
     // },

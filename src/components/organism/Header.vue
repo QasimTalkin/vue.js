@@ -8,7 +8,7 @@
         <li><a href="#">Contact</a></li>
       </ul>
     </nav>
-    <button>Login</button>
+    <button @click="toggleLogin" :class="{loggedIn: loginStatus}"  >{{ loginStatus ? 'LogOut' : 'LogIn' }}</button>
   </header>
 </template>
 
@@ -16,9 +16,16 @@
   export default {
     data() {
       return {
+        loginStatus: false,
         title: 'Quick Blog'
       }
-    }
+    },
+    methods: {
+      toggleLogin() {
+       this.loginStatus = !this.loginStatus
+        this.$emit('toggleLogin', this.loginStatus)
+      }
+    },
   }
 </script>
 
@@ -42,22 +49,23 @@
     }
   }
   button {
-    background: #f1356d;
+    background: var(--vue-green); 
     cursor: pointer;
     color: #fff;
     border: 0;
     border-radius: 5px;
     padding: 0.5rem 1rem;
+    width: 100px;
   }
   button:hover {
-    background: #f1356d;
+    background: #f1f135;
     opacity: 0.8;
+    color: #111
   }
-  button:focus {
-    outline: none;
-  }
-  button:active {
+  .loggedIn {
     background: #f1356d;
-    opacity: 0.6;
+    text-transform: capitalize;
+    transition: all 0.3s ease-in-out;
+    
   }
 </style>
