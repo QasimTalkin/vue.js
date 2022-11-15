@@ -1,10 +1,8 @@
 <template>
   <div>
     <app-header />
-    <app-content :toDoList="toDoList" :title="toDoTitle"/>
-    <hr>
-    <app-content :toDoList="toDoList" :title="toDotitle"/>
-    <site-footer />
+    <app-content :toDoList="toDoList" :title="toDoTitle" @changeTitle="titleChange($event)"/>
+    <site-footer :toDoTitle="toDoTitle"  />
   </div>
 </template>
 
@@ -46,6 +44,12 @@
           },
         ],
         toDoTitle: 'To Do List'
+      }
+    },
+    methods: {
+      titleChange(title) {
+        console.log(title)
+        this.toDoTitle = title
       }
     }
   }

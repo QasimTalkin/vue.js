@@ -1,8 +1,6 @@
 <template>
   <div>
-    <h2> {{ toDoTitle }} </h2>
-    <!-- change title -->
-    <button @click="changeTitle">Change Title</button>
+    <h2 @click="changeTitle"> {{ toDoTitle }} </h2>
    <div class="cards">
     <div v-for="todo in toDoList" :key="todo.title" class="card">
         <div class="card-body">
@@ -38,6 +36,7 @@
       },
       changeTitle() {
         this.toDoTitle = 'To Do List 2'
+        this.$emit('changeTitle', this.toDoTitle)
       }
     }
   }

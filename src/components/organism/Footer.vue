@@ -1,16 +1,23 @@
 <template>
   <div>
     <footer> 
-      <p> {{ copyRightsNotice }}</p>
+      <p> {{ copyRightsNotice }}</p> || <p> {{ toDoTitle }}</p>
     </footer>
   </div>
 </template>
 
 <script>
   export default {
+  
+  props: {
+      toDoTitle:{
+        type: String,
+        required: true
+      }
+    },
     data() {
       return {
-        copyRightsNotice: '© 2021 Quick Blog - All Rights Reserved QasimTech'
+        copyRightsNotice: '© 2021 Quick Blog - All Rights Reserved QasimTech '
       }
     }
   }

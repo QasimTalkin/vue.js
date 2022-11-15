@@ -465,3 +465,70 @@ a.name = 'b'
 console.log(a.name) // b
 console.log(b.name) // b
 ```
+
+## Events (child to parent)
+* Problem
+  * we want to pass data from the child component to the parent component
+  * say we have a component that has a list of employees
+  * we want to pass the selected employee to the parent component
+* Solution
+  * we can pass data from the child component to the parent component using 
+  * `events`
+  * `$emit`
+  * `@event-name`
+```html
+<template>
+  <div>
+    <h1>Employees</h1>
+    <ul>
+      <li v-for="employee in employees" :key="employee.id" @click="selectEmployee(employee)">{{ employee.name }}</li>
+    </ul>
+  </div>
+</template>
+<script>
+  export default {
+    name: 'AppEmployees',
+    props: {
+      employees: {
+        type: Array,
+        required: true,
+        default: []
+      }
+    },
+    methods: {
+      selectEmployee(employee) {
+        this.$emit('employee-selected', employee)
+      }
+    }
+  }
+</script>
+// parent component
+<template>
+  <div>
+    <app-employees :employees="employees" @employee-selected="employeeSelected"></app-employees>
+  </div>
+</template>
+<script>
+  import AppEmployees from './AppEmployees'
+  export default {
+    name: 'App',
+    components: {
+      'app-employees': AppEmployees
+    },
+    data() {
+      return {
+        employees: [
+          { id: 1, name: 'Employee 1' },
+          { id: 2, name: 'Employee 2' },
+          { id: 3, name: 'Employee 3' }
+        ]
+      }
+    },
+    methods: {
+      employeeSelected(employee) {
+        console.log(employee)
+      }
+    }
+  }
+</script>
+```
