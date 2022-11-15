@@ -336,8 +336,6 @@ new Vue({
 </script>
 ```
 ## reusing components Example
-
-
 Here is a simple flow chart:
 
 ```mermaid
@@ -351,3 +349,91 @@ graph TD;
     Footer-->SocialMedia;
     Footer-->CopyRightsNotice;
 ```
+
+## Passing data to components (props)
+* Problem
+  * We have several components that have the same data
+  * We want to reuse the components
+  * We want to pass the data to the components
+* Solution
+*  We can pass data to the components using `props`
+```html
+<template>
+  <div>
+    <app-servers :servers="servers"></app-servers>
+    <app-users :users="users"></app-users>
+  </div>
+</template>
+<script>
+  import AppServers from './AppServers'
+  import AppUsers from './AppUsers'
+  export default {
+    name: 'App',
+    components: {
+      'app-servers': AppServers,
+      'app-users': AppUsers
+    },
+    data() {
+      return {
+        servers: [
+          { id: 1, name: 'Server 1' },
+          { id: 2, name: 'Server 2' },
+          { id: 3, name: 'Server 3' }
+        ],
+        users: [
+          { id: 1, name: 'User 1' },
+          { id: 2, name: 'User 2' },
+          { id: 3, name: 'User 3' }
+        ]
+      }
+    }
+  }
+```
+
+## receiving data in components (props)
+```html
+<template>
+  <div>
+    <h1>Servers</h1>
+    <ul>
+      <li v-for="server in servers" :key="server.id">{{ server.name }}</li>
+    </ul>
+  </div>
+</template>
+<script>
+  export default {
+    name: 'AppServers',
+    props: ['servers']
+  }
+</script>
+```
+
+## props validation
+* Problem
+  * when we pass data to the components, we can pass any data type to the components
+  * we want to validate the data type of the props
+* Solution
+  * we can validate the data type of the props using `props`
+  * we can validate the data type of the props using `type`
+  * we can validate the data type of the props using `required`
+  * we can validate the data type of the props using `default`
+```html
+<template>
+  <div>
+    <h1>Servers</h1>
+    <ul>
+      <li v-for="server in servers" :key="server.id">{{ server.name }}</li>
+    </ul>
+  </div>
+</template>
+<script>
+  export default {
+    name: 'AppServers',
+    props: {
+      servers: {
+        type: Array,
+        required: true
+        default: []
+      }
+    }
+  }

@@ -17,6 +17,8 @@
 </script>
 
 <style lang="scss" scoped>
+
+
   footer {
     background: #333;
     color: #fff;
