@@ -51,7 +51,31 @@
         console.log(title)
         this.toDoTitle = title
       }
-    }
+    },
+    // beforeCreate() {
+    //   alert('beforeCreate')
+    // },
+    // created() {
+    //   alert('created')
+    // },
+    // beforeMount() {
+    //   alert('beforeMount')
+    // },
+    // mounted() {
+    //   alert('mounted')
+    // },
+    // beforeUpdate() {
+    //   alert('beforeUpdated')
+    // },
+    // updated() {
+    //   alert('beforeUpdated')
+    // },
+    // beforeDestroy() {
+    //   alert('beforeDestroy')
+    // },
+    // destroyed() {
+    //   alert('destroyed')
+    // }
   }
 </script>
 

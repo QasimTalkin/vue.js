@@ -532,3 +532,63 @@ console.log(b.name) // b
   }
 </script>
 ```
+
+## Event Bus
+* Problem
+  * listening to events from a component is not a good practice, and can lead to spaghetti code
+  * we want to have a global event bus, i.e a global event listener
+* Solution
+  * we can create a global event bus using 
+    * `Vue`
+    * `Vue.prototype`
+    * `$on`
+    * `$emit`
+    * `$off`
+    * `$once`
+    * `$off`
+## lifecycle hooks
+* Problem
+  * we want to execute some code when a component is created
+  * we want to execute some code when a component is destroyed
+  * we want to execute some code when a component is updated
+* Solution
+  * we can execute some code when a component is created using 
+    * `created` (beforeCreate --> created --> beforeMount --> mounted)
+    * `mounted` (mounted--> beforeUpdate --> updated)
+    * `updated` (updated --> beforeDestroy --> destroyed)
+    * `destroyed` (destroyed)
+
+
+## lifecycle hooks example
+```html
+<script>
+  export default {
+    methods: {
+    beforeCreate() {
+      console.log('beforeCreate')
+    },
+    created() {
+      console.log('created')
+    },
+    beforeMount() {
+      console.log('beforeMount')
+    },
+    mounted() {
+      console.log('mounted')
+    },
+    beforeUpdate() {
+      console.log('beforeUpdate')
+    },
+    updated() {
+      console.log('updated')
+    },
+    beforeDestroy() {
+      console.log('beforeDestroy')
+    },
+    destroyed() {
+      console.log('destroyed')
+    }
+  }
+}
+</script>
+```
