@@ -10,6 +10,7 @@
         <div class="form-controls">
           <slot name="controls"></slot>
         </div>
+        <slot name="preview-area"></slot>
       </form>
   </div>
 </template>

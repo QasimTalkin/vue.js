@@ -707,3 +707,20 @@ console.log(b.name) // b
   </div>
 </template>
 ```
+## pro-tip
+* input modifier `lazy` will update the data only when the input loses focus
+```html
+<input type="text" v-model.lazy="name">
+```
+
+## checkbox binding
+* Issue
+  * we want to bind a checkbox to a boolean value
+  * when a user checks the checkbox, we want to set the value to true and update the data
+* Solution
+  * we can bind a checkbox to a boolean value using `v-model`
+```html
+<input type="checkbox" v-model="checked" value="cb1">
+<input type="checkbox" v-model="checked" value="cb2">
+<input type="checkbox" v-model="checked" value="cb3">
+```
