@@ -3,10 +3,11 @@ import App from './App.vue'
 import App2 from './App2.vue'
 import App3 from './App3.vue'
 import Footer from './components/moelcules/Footer.vue'
+import VueResource from 'vue-resource'
 import './assets/main.css'
 
 Vue.component('site-footer', Footer)
-
+Vue.use(VueResource)
 // let app = new Vue({
 //   render: (h) => h(App),
 //   components: {

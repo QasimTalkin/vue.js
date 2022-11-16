@@ -2,10 +2,7 @@
   <div>
 
     <app-header @toggleLogin="toggleForm($event)" />
-    <button class="btn btn-primary" @click="addNewItemToToDoList">
-      Add New Item to ToDo List
-    </button>
-    <component v-show="loggedIn" :is="currentForm">
+     <component v-show="loggedIn" :is="currentForm">
       <div slot="title">Add new Task to learn</div>
       <div slot="content">
         <div class="form-group">
@@ -37,9 +34,6 @@
           />
         </div>
       </div>
-      <div slot="controls">
-        <button class="btn btn-primary" @click="addTask">Add Task</button>
-      </div>
       <div slot="preview-area">
         <h3>Preview</h3>
         <div class="card">
@@ -51,6 +45,7 @@
         </div>
       </div>
     </component>
+    <button class="btn btn-primary" @click="addTask" v-show="loggedIn">Add Task</button>
     <app-content
       :toDoList="toDoList"
       :title="toDoTitle"
@@ -113,24 +108,18 @@ export default {
       console.log(title);
     },
     addTask() {
-      debugger
-      this.toDoList.push({
-        title: "Learn Vue 35",
-        description: "Learn Vue 3 by building a simple blog app",
-        isComplete: false,
+      //  return if title is empty
+      if (!this.newTask.title) return;
+      this.$http.post('https://jsonplaceholder.typicode.com/users', this.newTask).then((response) => {
+        response.json().then((data) => {
+          this.toDoList.push(data);
+        });
       });
     },
     toggleForm(loggedIn) {
       this.loggedIn = loggedIn;
       this.currentForm = loggedIn ? "form-template" : null;
-    },
-    addNewItemToToDoList() {
-      this.toDoList.push({
-        title: "Learn Vue 35",
-        description: "Learn Vue 3 by building a simple blog app",
-        isComplete: false,
-      });
-    },
+    }
   },
   // beforeCreate() {
   //   alert('beforeCreate')
@@ -166,5 +155,12 @@ export default {
   padding: 1rem;
   border: 1px solid white;
   word-break: break-all;
+}
+button{
+  text-align: center;
+  margin: 1rem auto;
+  display: block;
+  padding: 1rem;
+
 }
 </style>

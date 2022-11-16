@@ -724,3 +724,82 @@ console.log(b.name) // b
 <input type="checkbox" v-model="checked" value="cb2">
 <input type="checkbox" v-model="checked" value="cb3">
 ```
+
+### HTTP Requests
+* Problem
+  * we want to make HTTP requests to fetch data from a server
+  * we want to make HTTP requests to send data to a server
+  * we wamt to be able to make `GET`, `POST`, `PUT`, `PATCH`, `DELETE` requests 
+* Solution
+  * we can make HTTP requests using `axios` or `fetch` or `vue-resource`
+  * we can make `GET`, `POST`, `PUT`, `PATCH`, `DELETE` requests using `vue-resource`
+
+## Example of GET using vue-resource
+```html
+<template>
+  <div>
+    <h1>HTTP Requests</h1>
+    <button @click="getEmployees">Get Employees</button>
+    <ul>
+      <li v-for="employee in employees" :key="employee.id">
+        {{ employee.name }}
+      </li>
+    </ul>
+  </div>
+</template>
+<script>
+  import VueResource from 'vue-resource'
+  export default {
+    name: 'AppHttp',
+    data() {
+      return {
+        employees: []
+      }
+    },
+    methods: {
+      getEmployees() {
+        this.$http.get('https://jsonplaceholder.typicode.com/users')
+          .then(response => {
+            this.employees = response.body
+          })
+      }
+    },
+    created() {
+      Vue.use(VueResource)
+    }
+  }
+</script>
+```
+## Example of POST, PUT, PATCH, DELETE using vue-resource
+```js
+methods: {
+  postEmployee() {
+    this.$http.post('https://jsonplaceholder.typicode.com/users', {
+      name: 'John Doe',
+      email: 'john.Dow@gmail.com',
+      phone: '1234567890'
+    }).then(response => {
+      console.log(response)
+    })
+  },
+  putEmployee() {
+    this.$http.put('https://jsonplaceholder.typicode.com/users/1', {
+      name: 'John Doe',
+    }).then(response => {
+      console.log(response)
+    })
+  },
+  deleteEmployee() {
+    this.$http.delete('https://jsonplaceholder.typicode.com/users/1').then(response => {
+      console.log(response)
+    })
+  },
+  patchEmployee() {
+    this.$http.patch('https://jsonplaceholder.typicode.com/users/1', {
+      name: 'John Doe',
+    }).then(response => {
+      console.log
+    })
+  }
+}
+```
