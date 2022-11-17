@@ -2,10 +2,17 @@
   <div>
     <h2 @click="changeTitle"> {{ toDoTitle }} </h2>
    <div class="cards">
-    <div v-for="todo in toDoList" :key="todo.title" class="card">
+    <div v-for="todo in toDoList" :key="todo.id" class="card">
         <div class="card-body">
           <h5 class="card-title">{{ todo.title }}</h5>
-          <p class="card-text">{{ todo.description }}</p>
+          <div class="card-pic" v-if="todo.image">
+            <img :src="todo.image" alt="pokemon" />
+          </div>
+          <!-- else -->
+          <div class="card-pic" v-else>
+              <logo />
+          </div>
+          <p class="card-text"  v-html="todo.description"></p>
           <button class="btn btn-primary" @click="setComplete(todo)">Set Complete</button>
           <div class="complete" :style="{width: todo.isComplete ? '100%' : '2%'}"></div>
         </div>
@@ -15,7 +22,11 @@
   </div>
 </template>
 <script>
+  import logo from "../icons/IconEcosystem.vue";
   export default {
+    components: {
+      logo,
+    },
     props: {
       toDoList: {
         type: Array,
@@ -48,10 +59,11 @@
 .cards {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 100%;
   padding: 0 1rem;
+  justify-content: stretch;
 }
 .card {
   margin: 1rem;
@@ -61,11 +73,15 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   width: min(500px, 50%);
   height: min(500px, 50%);
-  }
 
+  }
+// center cardtitile with all caps
 .card-title {
   font-size: 1.5rem;
   font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 1rem 0;
 }
 
 .card-text {
@@ -104,5 +120,21 @@ h2 {
   padding: 1rem;
   font-size: 2rem;
 }
+// set card iamge round with ligt grey border and shadow
+.card-img-top {
 
+}
+
+.card-pic {
+  img {
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  background: #333;
+  }
+}
 </style>

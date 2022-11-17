@@ -46,6 +46,9 @@
       </div>
     </component>
     <button class="btn btn-primary" @click="addTask" v-show="loggedIn">Add Task</button>
+    
+    <button class="btn btn-primary" @click="addPokemonAsTask">
+    Add Pokemons</button>
     <app-content
       :toDoList="toDoList"
       :title="toDoTitle"
@@ -73,8 +76,9 @@ export default {
       newTask: { title: "", description: "", isComplete: false },
       currentForm: null,
       loggedIn: false,
+      pokeCount: 10,
       toDoList: [
-        {
+        { 
           title: "Learn Vue",
           description: "Learn Vue by building a simple blog app",
           isComplete: true,
@@ -119,13 +123,32 @@ export default {
     toggleForm(loggedIn) {
       this.loggedIn = loggedIn;
       this.currentForm = loggedIn ? "form-template" : null;
-    }
+    }, 
+   async addPokemonAsTask(){
+        for (let i = 1; i <= this.pokeCount; i++) {
+          const response = await this.$http.get(`https://pokeapi.co/api/v2/pokemon/${i}`);
+          const data = await response.json();
+          const types = data.types.map((type) => type.type.name).join(", ");
+          const stats = data.stats.map((stat) => stat.stat.name).join(", ");
+          const typeAndStats = `<h3>Types</h3> ${types} <h3>Stats</h3> ${stats}`;
+          console.log(data);
+          this.toDoList.unshift({
+            title: data.name,
+            description: typeAndStats,
+            isComplete: false,
+            image: data.sprites.other["official-artwork"].front_default,
+          });
+        }
+        this.pokeCount += 10;
+      }
+    },
+    created() {
+    this.addPokemonAsTask()
   },
+  }
+
   // beforeCreate() {
   //   alert('beforeCreate')
-  // },
-  // created() {
-  //   alert('created')
   // },
   // beforeMount() {
   //   alert('beforeMount')
@@ -144,7 +167,6 @@ export default {
   // },
   // destroyed() {
   //   alert('destroyed')
-};
 </script>
 
 <style lang="scss" scoped>
