@@ -8,10 +8,10 @@
           <div class="card-pic" v-if="todo.image">
             <img :src="todo.image" alt="pokemon" />
           </div>
-          <!-- else -->
-          <div class="card-pic" v-else>
+     <div class="card-pic" v-random-color v-else>
               <logo />
           </div>
+    
           <p class="card-text"  v-html="todo.description"></p>
           <button class="btn btn-primary" @click="setComplete(todo)">Set Complete</button>
           <div class="complete" :style="{width: todo.isComplete ? '100%' : '2%'}"></div>
@@ -24,6 +24,14 @@
 <script>
   import logo from "../icons/IconEcosystem.vue";
   export default {
+    directives: {
+    randomColor: {
+        bind(el, binding, vnode) {
+          el.style.backgroundColor = '#' + Math.random().toString().slice(2, 8)
+          console.log(el.style.backgroundColor)
+        }
+      }
+    },
     components: {
       logo,
     },
@@ -89,6 +97,7 @@
   font-weight: 400;
   padding: 1rem 0;
   margin: 0;
+  
 }
 
 .card-body {
@@ -126,10 +135,12 @@ h2 {
 }
 
 .card-pic {
+  min-height: 400px;
   img {
   border-radius: 50%;
   border: 1px solid #ccc;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+
   width: 100%;
   height: 100%;
   margin: 0 auto;

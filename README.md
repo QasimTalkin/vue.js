@@ -803,3 +803,73 @@ methods: {
   }
 }
 ```
+## Custom Directives
+* Issue
+  * we would like vue to something for us, this behavior is not provided by vue
+  * we would want to add a custom behavior to an element
+  * for example when a user clicks on a button, we want to change the background color of the button randomly
+* Solution
+  * we can add a custom behavior to an element using `directives`
+  * say `v-random-color` is a custom directive that changes the background color of an element randomly
+
+## Example of custom directive
+```html
+<template>
+  <div>
+    <h1>Custom Directives</h1>
+    <button v-random-color>Random Color</button>
+  </div>
+</template>
+<script>
+  export default {
+    name: 'AppDirectives',
+    directives: {
+      randomColor: {
+        bind(el, binding, vnode) {
+          el.style.backgroundColor = '#' + Math.random().toString().slice(2, 8)
+        }
+      }
+    }
+  }
+</script>
+```
+## Custom Directives with Arguments
+* Issue
+  * we want a custom directive with value isDarkTheme to be true or false
+  * when the value is true, we want the background color to be black, otherwise we want the background color to be white
+* Solution
+  * we can add a custom directive with arguments using `v-theme-switch:isDarkTheme`
+  * we can access the value of the argument using `binding.value`
+
+## Example of custom directive with arguments
+```html
+<template>
+  <div>
+    <h1>Custom Directives with Arguments</h1>
+    <button v-theme-switch:isDarkTheme>Theme Switch</button>
+  </div>
+</template>
+<script>
+  export default {
+    name: 'AppDirectives',
+    directives: {
+      themeSwitch: {
+        bind(el, binding, vnode) {
+          if (binding.value) {
+            el.style.backgroundColor = 'black'
+            el.style.color = 'white'
+            this.isDarkTheme = true
+            console.log('theme', this.isDarkTheme)
+          } else {
+            el.style.backgroundColor = 'white'
+            el.style.color = 'black'
+            this.isDarkTheme = false
+            console.log(this.isDarkTheme)
+            console.log('theme', this.isDarkTheme)
+          }
+        }
+      }
+    }
+  }
+</script>
+```
